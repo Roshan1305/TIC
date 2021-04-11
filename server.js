@@ -27,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Configure the bodyParser middlewareasassas
+// Configure the bodyParser middleware
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -665,5 +665,6 @@ app.get("*", (req, res) => {
   });
 });
 
-// Configure our server to listen on the port defiend by our port variable
-app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
+app.listen(process.env.PORT || 3001, function () {
+  console.log("App started");
+});
