@@ -16,6 +16,7 @@
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.10",
     "gsap": "^3.6.0",
+    "http-proxy-middleware": "^1.1.1",
     "jquery": "^3.6.0",
     "lerp": "^1.0.3",
     "react": "^17.0.1",
