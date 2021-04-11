@@ -62,5 +62,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://ticsastra.herokuapp.com:3001/"
+  "proxy": "http://localhost:3001"
 }
