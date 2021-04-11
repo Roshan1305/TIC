@@ -35,13 +35,10 @@ app.use(
   })
 );
 
-mongoose.connect(
-  "mongodb+srv://admin-SastraIOT:iot&&tbi@cluster0.ce0t2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 mongoose.connection.on("error", function (error) {
   console.error("Database connection error:", error);
