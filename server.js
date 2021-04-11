@@ -7,13 +7,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const path = require("path");
 const bodyParser = require("body-parser");
-// place in src with index.js no need to import anywhere
-const proxy = require("http-proxy-middleware");
 
-module.exports = function (app) {
-  // add other server routes to path array
-  app.use(proxy([""], { target: "http://localhost:3001" }));
-};
 require("dotenv").config();
 
 app.use(express.json());
@@ -57,29 +51,31 @@ mongoose.connect(
 // Set our backend port to be either an environment variable or port 5000
 const port = 3001 || process.env.PORT;
 
-// //  This middleware informs the express application to serve our compiled React files
-// if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-//     app.use(express.static(path.join(__dirname, 'client/build')));
-
-//     app.get('*', function (req, res) {
-//         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//     });
-// };
-//Non api requests in production
+//  This middleware informs the express application to serve our compiled React files
 if (
   process.env.NODE_ENV === "production" ||
   process.env.NODE_ENV === "staging"
 ) {
-  // Add production middleware such as redirecting to https
+  app.use(express.static(path.join(__dirname, "client/build")));
 
-  // Express will serve up production assets i.e. main.js
-  app.use(express.static(__dirname + "/client/build"));
-  // If Express doesn't recognize route serve index.html
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
+//Non api requests in production
+// if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+//     // Add production middleware such as redirecting to https
+
+//     // Express will serve up production assets i.e. main.js
+//     app.use(express.static(__dirname + '/client/build'));
+//     // If Express doesn't recognize route serve index.html
+//     const path = require('path');
+//     app.get('*', (req, res) => {
+//         res.sendFile(
+//             path.resolve(__dirname, 'client', 'build', 'index.html')
+//         );
+//     });
+// }
 const finishedEventSchema = new mongoose.Schema({
   event_name: String,
   event_sponsors: String,
