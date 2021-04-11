@@ -43,6 +43,13 @@ mongoose.connect(
   }
 );
 
+mongoose.connection.on("error", function (error) {
+  console.error("Database connection error:", error);
+});
+
+mongoose.connection.once("open", function () {
+  console.log("Database connected");
+});
 // mongoose.connect("mongodb://localhost:27017/IoTDB", {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
