@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { IconButton } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles,
+} from "@material-ui/core/styles";
 //import { paperToast, paperButton } from "@polymer/paper-toast/paper-toast.js";
 import $ from "jquery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

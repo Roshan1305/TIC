@@ -6,6 +6,9 @@
   align-items: center;
   justify-content: center;
 }
+.MuiIconButton-root {
+  background-color: transparent !important;
+}
 .dot1,
 .dot2,
 .dot3 {
