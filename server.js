@@ -163,7 +163,7 @@ const subscribeSchema = new mongoose.Schema({
 });
 const Subscribe = new mongoose.model("Subscribe", subscribeSchema);
 
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   try {
     res.send("Got it");
   } catch (e) {
@@ -171,7 +171,7 @@ app.get("/", (req, res) => {
   }
 });
 
-app.post("/subscribe", (req, res) => {
+app.post("/api/subscribe", (req, res) => {
   try {
     console.log(req.body);
     Subscribe.findOne(
@@ -207,7 +207,7 @@ app.post("/subscribe", (req, res) => {
   }
 });
 
-app.post("/sendmailToSubscribers", (req, res) => {
+app.post("/api/sendmailToSubscribers", (req, res) => {
   try {
     Subscribe.find({}, (err, found) => {
       if (!err && found) {
@@ -234,7 +234,7 @@ app.post("/sendmailToSubscribers", (req, res) => {
   }
 });
 
-app.post("/new-event", (req, res) => {
+app.post("/api/new-event", (req, res) => {
   FinishedEvents.create({
     event_name: req.body.name,
     event_sponsors: req.body.sponsors,
@@ -248,14 +248,14 @@ app.post("/new-event", (req, res) => {
   res.send("Saved");
 });
 
-app.get("/cluster-details", (req, res) => {
+app.get("/api/cluster-details", (req, res) => {
   FormatCluster.find({}, (err, found) => {
     if (!err && found.length !== 0) res.send(found);
     else res.status(204).send("No details");
   });
 });
 
-app.post("/register-event", (req, res) => {
+app.post("/api/register-event", (req, res) => {
   RegisterEvents.create({
     event_name: req.body.name,
     event_desc: req.body.desc,
@@ -277,18 +277,18 @@ const firebaseConfig = {
   appId: "1:1008140158884:web:525ce07f97f671d7a22331",
 };
 
-app.get("/getFirebaseInfo", (req, res) => {
+app.get("/api/getFirebaseInfo", (req, res) => {
   res.json(firebaseConfig);
 });
 
-app.post("/new-cluster", (req, res) => {
+app.post("/api/new-cluster", (req, res) => {
   Cluster.create({
     cluster_name: req.body.cluster_name,
   });
   res.send("Created");
 });
 
-app.get("/clusters", (req, res) => {
+app.get("/api/clusters", (req, res) => {
   const arr = [];
   Cluster.find({}, (err, found) => {
     if (!err && found) found.map((cluster) => arr.push(cluster.cluster_name));
@@ -302,7 +302,7 @@ app.get("/noOfSubscribers", (req, res) => {
   });
 });
 
-app.get("/home-events", (req, res) => {
+app.get("/api/home-events", (req, res) => {
   var d = new Date();
   d.toLocaleString("en", { timeZone: "Asia/Kolkata" });
   var arr = [];
@@ -324,7 +324,7 @@ app.get("/home-events", (req, res) => {
     }
   });
 });
-app.get("/register-event", (req, res) => {
+app.get("/api/register-event", (req, res) => {
   RegisterEvents.findOne({ _id: req.query._id }, (err, found) => {
     if (!err) {
       if (found) {
@@ -337,13 +337,13 @@ app.get("/register-event", (req, res) => {
     }
   });
 });
-app.delete("/finished-register-events", (req, res) => {
+app.delete("/api/finished-register-events", (req, res) => {
   RegisterEvents.deleteOne({ _id: req.query.id })
     .then(() => res.send("Data Deleted"))
     .catch((err) => console.log(err));
 });
 
-app.delete("/deleted-finished-events", (req, res) => {
+app.delete("/api/deleted-finished-events", (req, res) => {
   FinishedEvents.deleteOne({ _id: req.query.id })
     .then(() => res.send("Data Deleted"))
     .catch((err) => console.log(err));
@@ -360,7 +360,7 @@ app.get("/finished-events", (req, res) => {
     }
   });
 });
-app.get("/single-event", (req, res) => {
+app.get("/api/single-event", (req, res) => {
   FinishedEvents.findOne({ _id: req.query._id }, (err, found) => {
     if (!err) {
       if (found) {
@@ -372,7 +372,7 @@ app.get("/single-event", (req, res) => {
   });
 });
 
-app.get("/current-batch-members", (req, res) => {
+app.get("/api/current-batch-members", (req, res) => {
   var d = new Date();
   month = d.getMonth();
   year = d.getFullYear();
@@ -403,7 +403,7 @@ app.get("/current-batch-members", (req, res) => {
   });
 });
 
-app.post("/new-member", (req, res) => {
+app.post("/api/new-member", (req, res) => {
   var count = 0;
   var teamExistance = true;
   FormatCluster.find({}, (err, found) => {
@@ -483,7 +483,7 @@ app.post("/new-member", (req, res) => {
   });
 });
 
-app.post("/refresh", (req, res) => {
+app.post("/api/refresh", (req, res) => {
   let refresh = req.body.refresh;
   jwt.verify(refresh, "TokenIssued", function (err, decoded) {
     if (!err) {
@@ -503,7 +503,7 @@ app.post("/refresh", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   Admin.findOne({ email: req.body.email }, (err, found) => {
     if (!err && found) {
       bcrypt.compare(req.body.password, found.password, function (err, result) {
@@ -532,7 +532,7 @@ app.post("/login", (req, res) => {
   });
 });
 
-app.post("/change-password", (req, res) => {
+app.post("/api/change-password", (req, res) => {
   Admin.findOne({ email: "iotclubsastra@gmail.com" }, (err, found) => {
     if (!err && found) {
       bcrypt.compare(
@@ -565,7 +565,7 @@ function randomString(length, chars) {
   return result;
 }
 
-app.get("/forgot-password", (req, res) => {
+app.get("/api/forgot-password", (req, res) => {
   Admin.findOne({ email: "iotclubsastra@gmail.com" }, (err, found) => {
     if (!err && found) {
       var random = randomString(
@@ -607,7 +607,7 @@ app.get("/forgot-password", (req, res) => {
   });
 });
 
-app.post("/verify", (req, res) => {
+app.post("/api/verify", (req, res) => {
   Verify.findOne({ email: "iotclubsastra@gmail.com" }, (err, found) => {
     if (!err) {
       if (found.otp == req.body.otp) {
@@ -621,7 +621,7 @@ app.post("/verify", (req, res) => {
   });
 });
 
-app.post("/verify-and-change-password", (req, res) => {
+app.post("/api/verify-and-change-password", (req, res) => {
   console.log(req.body.newPassword);
   Admin.findOne({ email: "iotclubsastra@gmail.com" }, (err, found) => {
     if (!err && found) {
@@ -639,7 +639,7 @@ app.post("/verify-and-change-password", (req, res) => {
   });
 });
 
-app.post("/signup", (req, res) => {
+app.post("/api/signup", (req, res) => {
   // const email = req.body.email;
   // const pass = req.body.password;
   console.log("ABCD");
