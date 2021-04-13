@@ -111,8 +111,8 @@
   position: absolute;
   bottom: 0%;
   color: white;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
+  margin-bottom: 2vh;
+  font-size: 0.65rem;
   font-family: "Poppins", sans-serif;
 }
 
@@ -163,9 +163,6 @@
   border: 1px solid #000;
   border-radius: 50%;
   box-shadow: #000 0px 5px 15px;
-}
-Tooltip {
-  background-color: transparent;
 }
 #upButton {
   position: absolute;
@@ -351,23 +348,40 @@ Tooltip {
 
 @media (max-width: 800px) {
   .yt-linksContainer {
-    flex: 0.9;
-    /* display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-    gap: 1%; */
+    flex: 0.8;
     display: flex;
     flex-direction: column;
     height: 90%;
     width: 100%;
-    /* margin: 15%;*/
     margin-bottom: 2%;
-    /* width: 40vw;
-    height: 50vh; */
-    /* margin-top: 20%; */
+  }
+  .res_total {
+    height: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+    width: -webkit-fill-available !important;
+    background-color: transparent !important;
+  }
+  .title_ytres {
+    flex: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
   }
   .title_ytres > h1 {
     font-size: 8vw;
+    font-family: "Noto Sans", sans-serif;
+  }
+  .heading {
+    font-size: 10vw;
+    font-family: "RocknRoll One", sans-serif;
+    color: white;
   }
   .yt-simpleContainer {
     width: 100%;
@@ -388,6 +402,31 @@ Tooltip {
   }
 }
 @media (max-width: 600px) {
+  .icons_font {
+    font-size: 15vw;
+    padding: 3vw;
+    background-color: rgb(1, 12, 38);
+    border: 1px solid #00bbbc;
+    border-radius: 50%;
+    box-shadow: #00bbbc 0px 5px 15px;
+  }
+  .res-copyrights {
+    position: absolute;
+    bottom: 0%;
+    color: white;
+    padding-bottom: 6vh;
+    font-size: 0.5rem;
+    font-family: "Poppins", sans-serif;
+  }
+  #upButton {
+    position: absolute;
+    margin-right: 1vw;
+    border-radius: 50%;
+    margin-bottom: 4vw;
+    right: 0;
+    bottom: 7%;
+  }
+
   .content_arduino,
   .content_nodeMCU,
   .content_raspberryPi {
@@ -403,7 +442,11 @@ Tooltip {
     left: -25%;
     opacity: 0.8;
   }
-
+  .heading {
+    font-size: 12vw;
+    font-family: "RocknRoll One", sans-serif;
+    color: white;
+  }
   .right-lines-res {
     transform: scaleX(-1);
     position: absolute;
