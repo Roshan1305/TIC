@@ -4,14 +4,14 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import "../css/Clusters.css";
 import $ from "jquery";
-import axios from "axios";
+import axios from "../axios";
 import Header from "./Header";
 
 function Clusters() {
   const [batches, setbatches] = useState(null);
 
   useEffect(() => {
-    axios.get("/api/v1/cluster-details").then((res) => {
+    axios.get("/cluster-details").then((res) => {
       if (res.status === 200) {
         setbatches(res.data.reverse());
       }

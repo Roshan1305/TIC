@@ -13,7 +13,7 @@ import Particles from "react-particles-js";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../axios";
 import InfoIcon from "@material-ui/icons/Info";
 
 function Home() {
@@ -34,7 +34,7 @@ function Home() {
 
   const addSubscriber = () => {
     axios
-      .post("/api/v1/subscribe", {
+      .post("/subscribe", {
         subscribe: subscribeDetails,
       })
       .then((res) => console.log(res))
@@ -59,12 +59,12 @@ function Home() {
   // console.log(scrolled)
 
   useEffect(() => {
-    axios.post("/api/v1/signup").then((res) => console.log("Data"));
+    axios.post("/signup").then((res) => console.log("Data"));
   }, []);
 
   //For GSAAAAPPP
   useEffect(() => {
-    axios.get("/api/v1/home-events").then((res) => {
+    axios.get("/home-events").then((res) => {
       if (res.status == 204) {
         setnextHolder(null);
       } else {
@@ -80,7 +80,7 @@ function Home() {
       }
     });
 
-    axios.get("/api/v1/finished-events").then((res) => {
+    axios.get("/finished-events").then((res) => {
       if (res.status == 204) {
         setfinished(null);
       } else {

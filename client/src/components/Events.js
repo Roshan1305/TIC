@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Events.css";
 import Bounce from "react-reveal/Bounce";
-import axios from "axios";
+import axios from "../axios.js";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import $ from "jquery";
@@ -19,7 +19,7 @@ function Events() {
 
   useEffect(() => {
     axios
-      .get("/api/v1/home-events")
+      .get("home-events")
       .then((res) => {
         if (res.status !== 204) {
           console.log(res.data);
@@ -33,7 +33,7 @@ function Events() {
       );
 
     axios
-      .get("/api/v1/finished-events")
+      .get("/finished-events")
       .then((res) => {
         if (res.status !== 204) {
           console.log(res.data);
