@@ -1,5 +1,30 @@
 const express = require("express");
 const app = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const Admin = require("../model/Admin.js");
+const Cluster = require("../model/Cluster.js");
+const FormatCluster = require("../model/Member.js");
+const Member = require("../model/Member.js");
+const RegisterEvents = require("../model/RegisterEvents.js");
+const FinishedEvents = require("../model/FinishedEvents.js");
+const Verify = require("../model/Verify.js");
+const Subscribe = require("../model/Subscribe.js");
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+  host: "smtp-mail.outlook.com", // hostname
+  secureConnection: false, // TLS requires secureConnection to be false
+  port: 587, // port for secure SMTP
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+  tls: {
+    ciphers: "SSLv3",
+  },
+});
+
 app.get("/", (req, res) => {
   try {
     res.send("Got it");
