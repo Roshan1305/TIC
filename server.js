@@ -670,6 +670,6 @@ app.use("/api/v1/", api);
 //   });
 // });
 
-app.listen(process.env.PORT || 3001, function () {
+app.listen(process.env.PORT || 5000, function () {
   console.log("App started");
 });
