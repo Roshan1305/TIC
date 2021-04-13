@@ -11,7 +11,7 @@ const FinishedEvents = require("../model/FinishedEvents.js");
 const Verify = require("../model/Verify.js");
 const Subscribe = require("../model/Subscribe.js");
 const nodemailer = require("nodemailer");
-
+const morgan = require("morgan");
 var transporter = nodemailer.createTransport({
   host: "smtp-mail.outlook.com", // hostname
   secureConnection: false, // TLS requires secureConnection to be false

@@ -7,12 +7,11 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const path = require("path");
 const bodyParser = require("body-parser");
-
+const morgan = require("morgan");
 require("dotenv").config();
 
 app.use(express.json());
 // app.set("port", 3001);
-
 app.use(express.static("public"));
 app.use(
   cors({
@@ -167,6 +166,8 @@ app.use((req, res, next) => {
   next();
 });
 const api = require("./routes/routes");
+app.use(morgan("tiny"));
+
 app.use("/api/v1/", api);
 // Catch any bad requests
 // app.get("/", (req, res) => {
